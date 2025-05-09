@@ -1,0 +1,184 @@
+
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Modern Business</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #0056b3;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #007BFF;
+      margin-bottom: 30px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .service {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+    }
+
+    .service h3 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .service p {
+      color: #555;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact p {
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Modern Business</h1>
+    <p>We build your success with style</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p style="text-align: center; max-width: 700px; margin: auto;">We are a passionate team dedicated to delivering top-notch solutions tailored to your business needs. With years of experience, we bring creativity, efficiency, and innovation to every project.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3>Web Design</h3>
+        <p>Modern, responsive websites designed to impress and perform.</p>
+      </div>
+      <div class="service">
+        <h3>Marketing</h3>
+        <p>Grow your audience with effective online marketing strategies.</p>
+      </div>
+      <div class="service">
+        <h3>Consulting</h3>
+        <p>Get expert advice to improve your business workflows and tech stack.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="contact">
+      <p>Email: hello@modernbusiness.com</p>
+      <p>Phone: +123 456 7890</p>
+      <button onclick="showMessage()">Send Message</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Modern Business. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function showMessage() {
+      alert("Thank you! We'll get back to you soon.");
+    }
+  </script>
+
+</body>
+</html>
