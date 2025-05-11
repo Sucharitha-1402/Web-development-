@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Responsive Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    header {
+      background: #333;
+      color: white;
+      padding: 20px;
+    }
+
+    section {
+      margin: 30px 0;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #0066cc;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #004999;
+    }
+
+    img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    /* Tablet */
+    @media (max-width: 768px) {
+      body {
+        background-color: #e0f7fa;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    /* Phone */
+    @media (max-width: 480px) {
+      body {
+        background-color: #fff3e0;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Responsive & Interactive Webpage</h1>
+  </header>
+
+  <!-- Quiz Section -->
+  <section>
+    <h2>Quiz: What is 2 + 2?</h2>
+    <button onclick="checkAnswer(3)">3</button>
+    <button onclick="checkAnswer(4)">4</button>
+    <button onclick="checkAnswer(5)">5</button>
+    <p id="quizResult"></p>
+  </section>
+
+  <!-- Image Carousel -->
+  <section>
+    <h2>Image Carousel</h2>
+    <img id="carousel" src="https://via.placeholder.com/300x200?text=Image+1" alt="carousel image"/>
+    <br>
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+  </section>
+
+  <!-- API Data Fetch -->
+  <section>
+    <h2>Random Joke Generator</h2>
+    <button onclick="getJoke()">Get Joke</button>
+    <p id="joke">Click the button to load a joke.</p>
+  </section>
+
+  <script>
+    // Quiz Logic
+    function checkAnswer(answer) {
+      const result = document.getElementById("quizResult");
+      result.textContent = answer === 4 ? "Correct!" : "Wrong, try again!";
+    }
+
+    // Carousel Logic
+    const images = [
+      "https://via.placeholder.com/300x200?text=Image+1",
+      "https://via.placeholder.com/300x200?text=Image+2",
+      "https://via.placeholder.com/300x200?text=Image+3"
+    ];
+    let index = 0;
+
+    function showImage() {
+      document.getElementById("carousel").src = images[index];
+    }
+
+    function nextImage() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+
+    function prevImage() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+
+    // Fetch Joke from API
+    async function getJoke() {
+      const jokeEl = document.getElementById("joke");
+      jokeEl.textContent = "Loading...";
+      try {
+        const res = await fetch("https://v2.jokeapi.dev/joke/Any?safe-mode&type=single");
+        const data = await res.json();
+        jokeEl.textContent = data.joke;
+      } catch (error) {
+        jokeEl.textContent = "Failed to fetch joke.";
+      }
+    }
+  </script>
+</body>
+</html>
