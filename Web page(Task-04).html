@@ -1,0 +1,176 @@
+
+<!-- === Project 1: Personal Portfolio Website === -->
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="about">
+    <h1>About Me</h1>
+    <p>Hello! I'm a web developer passionate about building responsive web apps.</p>
+  </section>
+  <section id="projects">
+    <h1>Projects</h1>
+    <div class="project-card">
+      <h2>To-Do App</h2>
+      <p>Simple task manager with localStorage support.</p>
+    </div>
+    <div class="project-card">
+      <h2>Product Listing Page</h2>
+      <p>Interactive page with filters and sorting.</p>
+    </div>
+  </section>
+  <section id="contact">
+    <h1>Contact</h1>
+    <p>Email: yourname@example.com</p>
+  </section>
+</body>
+</html>
+
+<!-- style.css -->
+body { font-family: Arial; margin: 0; padding: 0; }
+nav ul { display: flex; list-style: none; background: #333; padding: 10px; }
+nav ul li a { color: white; padding: 10px; text-decoration: none; }
+section { padding: 20px; }
+.project-card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+
+
+<!-- === Project 2: To-Do List App === -->
+<!-- todo.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>To-Do App</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Add a new task" />
+  <button onclick="addTask()">Add</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      taskList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.textContent = task;
+        const btn = document.createElement('button');
+        btn.textContent = 'Delete';
+        btn.onclick = () => deleteTask(index);
+        li.appendChild(btn);
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const task = taskInput.value.trim();
+      if (task) {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push(task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        taskInput.value = '';
+        loadTasks();
+      }
+    }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    loadTasks();
+  </script>
+</body>
+</html>
+
+
+<!-- === Project 3: Product Listing Page === -->
+<!-- products.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Listing</title>
+  <style>
+    .product { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+    .controls { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Products</h1>
+  <div class="controls">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="electronics">Electronics</option>
+      <option value="clothing">Clothing</option>
+    </select>
+    <select id="sort">
+      <option value="price-asc">Price Low to High</option>
+      <option value="price-desc">Price High to Low</option>
+      <option value="rating-desc">Top Rated</option>
+    </select>
+  </div>
+  <div id="productList"></div>
+
+  <script>
+    const products = [
+      { name: "Phone", category: "electronics", price: 300, rating: 4.5 },
+      { name: "Jeans", category: "clothing", price: 50, rating: 4.0 },
+      { name: "Laptop", category: "electronics", price: 900, rating: 4.8 },
+      { name: "Shirt", category: "clothing", price: 30, rating: 3.9 }
+    ];
+
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortSelect = document.getElementById('sort');
+    const productList = document.getElementById('productList');
+
+    function displayProducts() {
+      const category = categoryFilter.value;
+      const sort = sortSelect.value;
+      let filtered = [...products];
+
+      if (category !== 'all') {
+        filtered = filtered.filter(p => p.category === category);
+      }
+
+      if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+      if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+      if (sort === 'rating-desc') filtered.sort((a, b) => b.rating - a.rating);
+
+      productList.innerHTML = '';
+      filtered.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `<h3>${p.name}</h3><p>Category: ${p.category}</p><p>Price: $${p.price}</p><p>Rating: ${p.rating}</p>`;
+        productList.appendChild(div);
+      });
+    }
+
+    categoryFilter.onchange = sortSelect.onchange = displayProducts;
+    window.onload = displayProducts;
+  </script>
+</body>
+</html>
